@@ -12,7 +12,6 @@ def dashboard(request):
     #    lista_candidato = get_object_or_404(Candidato, usuario=usuario.id)
         return render(request, 'dashboard.html',
                       {'lista': lista_candidato, 'usuario_logado': request.user})
-    # TODO FALTA COLOCAR A EXEÇÃO CORRETA
     except Candidato.DoesNotExist:
         return redirect('candidato:cadastro_candidato')
 
