@@ -27,3 +27,4 @@ def vaga_por_curso(request, curso_escolhido):
     print('Query-->', query)
     return query
 
+# TODO AO SELECIONAR O EVENTO, DEVE SER MOSTRADO APENAS OS CURSOS RELACIONADOS AO EVENTO.

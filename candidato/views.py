@@ -25,7 +25,7 @@ def cadastro_candidato(request):
             candidato.usuario = request.user
             candidato.save()
             messages.success(request, 'Operação realizada com sucesso!')
-            # TODO PASSAR PARAMETRO NO REDIRECT
+            # PASSAR PARAMETRO NO REDIRECT
             # return redirect('candidato:dashboard', pk=candidato.pk)
             return redirect('candidato:dashboard')
     return render(request, 'cadastro_candidato.html', {'form': form, 'usuario_logado': request.user})
