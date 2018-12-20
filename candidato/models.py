@@ -12,7 +12,7 @@ class Candidato(models.Model):
     matricula = models.CharField(max_length=25, verbose_name="Matrícula", blank=True)
     sexo = models.CharField(max_length=1, choices=SEXO_CHOICES, null=False, verbose_name="Sexo", blank=True)
     dta_nascimento = models.DateField(null=False, verbose_name="Data de Nascimento", blank=True)
-    curriculo = models.FileField(upload_to='uploads/', blank=True)
+    curriculo = models.FileField(upload_to='uploads/', blank=True, null=True)
     celular = models.CharField(max_length=15, null=False, verbose_name="Celular", blank=True)
     usuario = models.OneToOneField(User, related_name="candidato", on_delete=models.CASCADE)
 
