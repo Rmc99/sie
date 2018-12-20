@@ -40,4 +40,4 @@ def atualiza_candidato(request, pk):
         if form.is_valid():
             form.save()
             return redirect('candidato:dashboard')
-    return render(request, 'atualiza_candidato.html', {'form': form})
+    return render(request, 'atualiza_candidato.html', {'form': form, 'usuario_logado': request.user})
