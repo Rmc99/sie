@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Sistema de Inscrição em Eventos .: SIE{% endblock %}
+{% block body %}
+    <div>
+        <h2><strong>Bem Vindo!</strong></h2>
+            <a href="{% url 'login' %}">Entrar</a><br>
+            Criar meu <a href="{% url 'usuarios:registrar' %}">Login</a>
+        <h2>Eventos Abertos</h2>
+            {% for e in evento %}
+                {% if e.situacao == "2" %}
+                    {{e.nome}}
+                {% else %}
+                    Nenhum Evento aberto!
+                {% endif %}
+            {% endfor %}
+    </div>
+    {{ qtd_curso }}
+
+
+{% endblock %}
