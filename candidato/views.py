@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CandidatoForm
 from django.contrib import messages
 from .models import Candidato, User
@@ -29,3 +29,15 @@ def cadastro_candidato(request):
             # return redirect('candidato:dashboard', pk=candidato.pk)
             return redirect('candidato:dashboard')
     return render(request, 'cadastro_candidato.html', {'form': form, 'usuario_logado': request.user})
+
+@login_required
+def atualiza_candidato(request, pk):
+    candidato = get_object_or_404(Candidato, pk=pk)
+
+    form = CandidatoForm(request.POST or None, request.FILES or None, instance=candidato)
+
+    if request.method =='POST':
+        if form.is_valid():
+            form.save()
+            return redirect('candidato:dashboard')
+    return render(request, 'atualiza_candidato.html', {'form': form})
