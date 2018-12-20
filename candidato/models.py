@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from cpffield import cpffield
 
 class Candidato(models.Model):
     SEXO_CHOICES = (
@@ -7,7 +8,7 @@ class Candidato(models.Model):
         ("F", "Feminino"),
     )
     nome = models.CharField(max_length=150, null=False, verbose_name="Nome do Candidato", blank=True)
-    cpf = models.CharField(max_length=11, verbose_name="CPF", blank=True)
+    cpf = cpffield.CPFField('CPF', max_length=14, null=False)
     endereco = models.CharField(max_length=200, null=False, verbose_name="Endereço", blank=True)
     matricula = models.CharField(max_length=25, verbose_name="Matrícula", blank=True)
     sexo = models.CharField(max_length=1, choices=SEXO_CHOICES, null=False, verbose_name="Sexo", blank=True)
