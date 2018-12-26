@@ -3,6 +3,12 @@ from django.shortcuts import render, redirect
 from .models import Inscricao, Curso
 from .forms import InscricaoForm
 from django.contrib import messages
+# Responsável pela impressão em PDF
+import io
+from django.http import FileResponse
+from reportlab.pdfgen import canvas
+
+# TODO AO SELECIONAR O EVENTO, DEVE SER MOSTRADO APENAS OS CURSOS RELACIONADOS AO EVENTO.
 
 @login_required
 def efetuar_inscricao(request):
@@ -31,4 +37,10 @@ def comprovante_inscricao(request, pk):
     insc = Inscricao.objects.get(pk=pk)
     return render(request, 'comprovante_inscricao.html', {'inscricao': insc, 'usuario_logado': request.user})
 
-# TODO AO SELECIONAR O EVENTO, DEVE SER MOSTRADO APENAS OS CURSOS RELACIONADOS AO EVENTO.
+def comprovante_inscricao_pdf(request):
+    buffer = io.BytesIO()
+    p = canvas.Canvas(buffer)
+    p.drawString(100, 100, "Hello world.")
+    p.showPage()
+    p.save()
+    return FileResponse(buffer, as_attachment=True, filename='hello.pdf')
