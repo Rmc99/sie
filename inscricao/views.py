@@ -17,7 +17,7 @@ def efetuar_inscricao(request):
             if vagas <= cursos.qtd_vagas:
                 inscricao.save()
                 messages.success(request, 'Inscrição confirmada no curso')
-                return redirect('candidato:dashboard')
+                return redirect('inscricao:comprovante_inscricao', pk=inscricao.pk)
             else:
                 messages.info(request, 'Vagas já preenchidas')
     return render(request, 'efetuar_inscricao.html', {'form': form, 'usuario_logado': request.user})
@@ -26,5 +26,9 @@ def vaga_por_curso(request, curso_escolhido):
     query = Inscricao.objects.filter(curso=curso_escolhido).count()
     print('Query-->', query)
     return query
+
+def comprovante_inscricao(request, pk):
+    insc = Inscricao.objects.get(pk=pk)
+    return render(request, 'comprovante_inscricao.html', {'inscricao': insc, 'usuario_logado': request.user})
 
 # TODO AO SELECIONAR O EVENTO, DEVE SER MOSTRADO APENAS OS CURSOS RELACIONADOS AO EVENTO.
